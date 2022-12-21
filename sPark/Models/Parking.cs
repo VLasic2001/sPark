@@ -1,4 +1,4 @@
-﻿using sPark.Data.Entities.Enums;
+﻿using sPark.Enums;
 
 namespace sPark.Models
 {

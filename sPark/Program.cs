@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<SParkContext>(options =>
@@ -12,6 +14,20 @@ builder.Services.AddDbContext<SParkContext>(options =>
     var connectionString = builder.Configuration.GetConnectionString("SParkContext");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     });
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy  =>
+                      {
+                          policy.WithOrigins("https://localhost:7228", "https://localhost:44449");
+                      });
+});
+
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
+//services.AddScoped<IRegisterRepository, RegisterRepository>();
+//services.AddScoped<IProductRepository, ProductRepository>();
+//services.AddScoped<IReceiptRepository, ReceiptRepository>();
 
 // Add services to the container.
 
@@ -30,11 +46,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseCors(MyAllowSpecificOrigins);
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapFallbackToFile("index.html");;
+app.MapFallbackToFile("index.html");
 
 app.Run();

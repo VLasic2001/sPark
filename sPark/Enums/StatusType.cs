@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sPark.Data.Entities.Enums
+namespace sPark.Enums
 {
     public enum StatusType
     {
