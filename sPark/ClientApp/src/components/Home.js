@@ -8,6 +8,9 @@ import Select from "react-select";
 const Home = () => {
 	console.log(JSON.parse(localStorage.getItem(`currentUser`)));
 
+	if (!localStorage.getItem(`currentUser`)) {
+		window.location.href = "https://localhost:44449/register";
+	}
 	function logout() {
 		localStorage.removeItem("currentUser");
 		window.location.href = "https://localhost:44449/login";
