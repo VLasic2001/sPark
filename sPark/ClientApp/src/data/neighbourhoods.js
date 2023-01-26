@@ -16,5 +16,6 @@ export const neighbourhoods = [
 	{ label: "Brodarica", value: "brodarica" },
 	{ label: "Kman", value: "kman" },
 	{ label: "Kocunar", value: "kocunar" },
+	{ label: "Split 3", value: "split3" },
 	{ label: "Drugo", value: "drugo" },
 ];

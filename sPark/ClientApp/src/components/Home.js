@@ -6,7 +6,7 @@ import homeImage from "../images/home.png";
 import Select from "react-select";
 
 const Home = () => {
-	console.log(JSON.parse(localStorage.getItem(`currentUser`)));
+	const [selected, setSelected] = useState(null);
 
 	if (!localStorage.getItem(`currentUser`)) {
 		window.location.href = "https://localhost:44449/register";
@@ -17,8 +17,14 @@ const Home = () => {
 	}
 
 	function profileClick() {
-		alert("Coming soon!");
+		window.location.href = "https://localhost:44449/profile";
 	}
+
+	const handleChange = (selectedOption) => {
+		setSelected(selectedOption);
+		localStorage.setItem(`selected`, JSON.stringify(selectedOption));
+		window.location.href = "https://localhost:44449/search";
+	};
 
 	return (
 		<div className="homeContainer">
@@ -55,6 +61,8 @@ const Home = () => {
 						}}
 						className="parkingSearch"
 						options={neighbourhoods}
+						onChange={handleChange} 
+						autoFocus={true}
 					></Select>
 				</div>
 				<img src={homeImage} />
